@@ -1,0 +1,19 @@
+.categoryList{
+
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.addCategory{
+    width: 70%;
+    margin-left: 5%;
+    text-align: center;
+}
+
+.mat-line{
+    display: flex;
+}
+
+.btn{
+    float: right;
+}

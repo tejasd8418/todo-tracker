@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "todonotification-1": {
+      "hosting": {
+        "todoApp": [
+          "todonotification-1"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "todonotification-1"
+  }
+}

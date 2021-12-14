@@ -1,0 +1,36 @@
+
+    <div *ngFor="let todo of todos">
+
+        <mat-card class="example-card">
+            <mat-card-header>
+
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{todo.todoTitle}}</mat-card-title>
+            </mat-card-header>
+
+            <!-- <img mat-card-image src={{todo?.image?.imageUrl}} alt={{todo?.image?.imageName}}> -->
+            <mat-card-content class="mat-card-content">
+                <p>
+                    {{todo.todoContent}}
+                </p>
+
+                {{todo.dueDate}}
+                {{todo.isHighPriority}}
+            </mat-card-content>
+            <mat-card-actions>
+
+
+                    <button mat-menu-item (click)="addToArchives(todo)">
+                        <span>
+                            <mat-icon>archive</mat-icon> Add to archives
+                        </span>
+                    </button>
+                    <button mat-menu-item (click)="deleteTodo(todo)">
+                        <span>
+                            <mat-icon>delete_outline</mat-icon> Delete
+                        </span>
+                    </button>
+
+            </mat-card-actions>
+        </mat-card>
+    </div>

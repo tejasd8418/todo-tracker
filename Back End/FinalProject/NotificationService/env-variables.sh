@@ -1,0 +1,2 @@
+export MONGO_DATABASENAME=todonotification
+export MONGO_URI=mongodb://localhost:27017/todonotification

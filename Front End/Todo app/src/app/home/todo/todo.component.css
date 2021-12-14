@@ -1,0 +1,15 @@
+.todo-item {  
+    background-color: pink;
+    /* width: 22%; */
+    margin: 10px;
+}
+
+.mat-card-content{
+    font-size: medium;
+}
+
+/* .example-card{
+    background-color: #ffeedd;
+} */
+
+

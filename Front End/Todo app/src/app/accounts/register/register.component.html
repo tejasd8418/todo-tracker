@@ -1,0 +1,73 @@
+<div class="formContainer">
+<form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()" >
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email Id" formControlName="emailId">
+          </mat-form-field>
+          <mat-error *ngIf="registerForm.controls['emailId'].hasError('required') && (registerForm.controls['emailId'].dirty ||registerForm.controls['emailId'].touched)">
+            Email Id is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['emailId'].hasError('email') && (registerForm.controls['emailId'].dirty ||registerForm.controls['emailId'].untouched)">
+            Please enter <strong>email</strong> only
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="User Name" formControlName="userName">
+          </mat-form-field>
+          <mat-error *ngIf="registerForm.controls['userName'].hasError('required') && (registerForm.controls['userName'].dirty ||registerForm.controls['userName'].touched)">
+            User Name is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="(registerForm.controls['userName'].hasError('minlength') || registerForm.controls['userName'].hasError('maxlength')) && (registerForm.controls['userName'].dirty ||registerForm.controls['userName'].touched)">
+            User Name should be between <strong>5 to 15</strong> characters
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+          <mat-error *ngIf="registerForm.controls['password'].hasError('required') && (registerForm.controls['password'].dirty ||registerForm.controls['password'].touched)">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="(registerForm.controls['password'].hasError('minlength') || registerForm.controls['password'].hasError('maxlength')) && (registerForm.controls['password'].dirty ||registerForm.controls['password'].touched)">
+            Password should be between <strong>5 to 15</strong> characters
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Phone Number" formControlName="phoneNo">
+          </mat-form-field>
+          <mat-error *ngIf="registerForm.controls['phoneNo'].hasError('required') && (registerForm.controls['phoneNo'].dirty ||registerForm.controls['phoneNo'].touched)">
+            Phone Number is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="(registerForm.controls['phoneNo'].hasError('minlength') || registerForm.controls['phoneNo'].hasError('maxlength')) && (registerForm.controls['phoneNo'].dirty ||registerForm.controls['phoneNo'].touched)">
+            Phone Number should have <strong>10</strong> numbers only
+          </mat-error>
+        </div>
+      </div>
+
+      
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Submit</button>
+      <button mat-raised-button type="button" (click)="login()">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+</div>

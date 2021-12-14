@@ -1,0 +1,17 @@
+<div class="formContainer">
+    <form [formGroup]="addGuestForm" novalidate (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Guest Email Id" formControlName="guestEmailId">
+                </mat-form-field>
+                <mat-error *ngIf="addGuestForm.controls['guestEmailId'].hasError('required')">
+                    Email Id is <strong>required</strong>
+                </mat-error>
+            </div>
+        </div>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </mat-card-actions>
+    </form>
+</div>
