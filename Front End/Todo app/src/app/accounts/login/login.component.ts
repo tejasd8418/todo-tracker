@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/class/user';
 import { TodoServiceService } from 'src/app/service/todoService/todo-service.service';
@@ -18,10 +19,12 @@ export class LoginComponent {
       Validators.required, Validators.minLength(2), Validators.maxLength(14)])],
   });
   errorMessage!: string;
+  invalidLogin: boolean = false;
+  error: any;
 
 
 
-  constructor(private fb: FormBuilder,  private registerAccount: UserServiceService, private todoService: TodoServiceService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private fb: FormBuilder,  private userService: UserServiceService, private todoService: TodoServiceService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar) {}
 
   onSubmit(): void {
     let newAccount: User = new User();
@@ -29,21 +32,19 @@ export class LoginComponent {
     newAccount.emailId = this.loginForm.value.emailId;
     newAccount.password = this.loginForm.value.password;
 
-    this.registerAccount.loginUser(newAccount).subscribe(data => {
+    this.userService.loginUser(newAccount).subscribe(data => {
       console.log(data);
       this.router.navigate([""]);
+      this.invalidLogin = false
+      this.snackBar.open("Login Successfully", "X");
+
     },
 
       error => {
-        console.log(error)
-        this.errorMessage = '';
-        if (error.status === 400)
-          this.errorMessage = `Failed to fetch data, try again later !!`;
-        else if (error.status === 500)
-          this.errorMessage = `Service Unavailable !!! Inconvenience Regretted`;
-        else
-          this.errorMessage = 'Site Unavailable, Try again later !!';
-        console.log(error.status);
+        this.invalidLogin = true
+        this.error = error.message;
+        this.snackBar.open("Login Failed", "X");
+
       });
   }
 

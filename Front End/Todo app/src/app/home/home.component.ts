@@ -8,7 +8,6 @@ import { UserServiceService } from '../service/userService/user-service.service'
 import { CreateTodoComponent } from './create-todo/create-todo.component';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from '../model/user';
-import { ArchivesComponent } from './archives/archives.component';
 import { ArchivesServiceService } from '../service/archivesService/archives-service.service';
 
 @Component({
@@ -28,6 +27,8 @@ export class HomeComponent implements OnInit, OnChanges {
   displayCategories!: Category[];
   changeMade: any = "no"; 
 
+  currentUser = sessionStorage.getItem('emailId')
+
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private route: ActivatedRoute, private todoService: TodoServiceService, public dialog: MatDialog, private userService: UserServiceService, private archivesService: ArchivesServiceService) {
     this.todosToDisplay = [];
     this.displayCategories = [];
@@ -36,24 +37,39 @@ export class HomeComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(): void {
-    // this.todoService.getAllCategories("tejas@gmail.com").subscribe((data)=>{
-    //   data.map((element)=>{
-    //     console.log(element);
-    //     this.displayCategories.push(element)
-    //   });
-    // })
+
   }
 
 
   ngOnInit(): void {
     this.displayCategories = [];
-    this.todoService.getAllCategories("tejas@gmail.com").subscribe((data)=>{
+    this.todoService.getAllCategories(sessionStorage.getItem('emailId')).subscribe((data)=>{
       data.map((element)=>{
         console.log(element);
-        this.displayCategories.push(element)
+        this.displayCategories.push(element);
       });
     })
   }
+
+  active = 1;
+
+  tabIndex = 0 ;
+
+  logout(){
+    
+    this.userService.logOut();
+    this.router.navigate(['/accounts/login']);
+  }
+
+  accountInfo(){
+
+  }
+
+changeTab(event: any){
+   this.tabIndex = event.index;
+}
+
+
 
   onSelectedCategory(category: Category) {
     this.selectedCategory = category;
@@ -62,14 +78,14 @@ export class HomeComponent implements OnInit, OnChanges {
   }
 
   updateTodos(category: Category){
-    this.todoService.getAllTodos("tejas@gmail.com",category.categoryId).subscribe(data=>{
+    this.todoService.getAllTodos(sessionStorage.getItem('emailId'),category.categoryId).subscribe(data=>{
       console.log(data);
       this.todosToDisplay = data;
     });
   }
 
   updateArchives(category: Category){
-    this.archivesService.getAllTodos("tejas@gmail.com",category.categoryId).subscribe(data=>{
+    this.archivesService.getAllTodos(sessionStorage.getItem('emailId'),category.categoryId).subscribe(data=>{
       console.log(data);
       this.archivesToDisplay = data;
     });
@@ -88,7 +104,7 @@ export class HomeComponent implements OnInit, OnChanges {
   composeTodoAdd(todo: Todo) {
     console.log("make change in ngChanges");
     this.refresh = "yes";
-    // this.updateScheduledEmail();
+
   }
 
   
@@ -97,7 +113,7 @@ export class HomeComponent implements OnInit, OnChanges {
       const dialog1 = this.dialog.open(CreateTodoComponent, {
         width: '1000px',
         data: selectedCategory
-        // disableClose: true ,
+
   
       });
 
@@ -109,9 +125,14 @@ export class HomeComponent implements OnInit, OnChanges {
     
   }
 
-  accountInfo(){
+  aboutUs(){
+
+  }
+
+  privacyPolicy(){
     
   }
+
 
 }
 

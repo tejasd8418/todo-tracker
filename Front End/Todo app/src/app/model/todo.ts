@@ -6,9 +6,9 @@ export class Todo {
     todoId!: number;
     todoTitle!: string;
     todoContent!: string;
-    image!: Image;
+    imageUrl!: string;
     dueDate!: string;
-    isHighPriority!: boolean;
+    highPriority!: boolean;
     completed!: boolean;
     guests!: Guest[];
 

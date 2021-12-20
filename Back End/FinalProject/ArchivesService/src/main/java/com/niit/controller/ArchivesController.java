@@ -48,32 +48,32 @@ public class ArchivesController {
     }
 
 
-    @GetMapping("/archives/categories/{emailid}")
-    public ResponseEntity<?> getAllCategoriesFromList(@PathVariable String emailid) throws UserNotFoundException {
-        try{
-            responseEntity = new ResponseEntity<>(archivesService.getAllCategories( emailid), HttpStatus.OK);
-        }catch(UserNotFoundException e)
-        {
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
-
-
-    @DeleteMapping("/archives/{emailid}/{categoryid}")
-    public ResponseEntity<?> deleteCategoryFromList(@PathVariable String emailid,@PathVariable int categoryid) throws UserNotFoundException, CategoryNotFoundException
-    {
-        try {
-            responseEntity = new ResponseEntity<>(archivesService.deleteCategoryFromList(emailid, categoryid), HttpStatus.OK);
-        }
-        catch ( CategoryNotFoundException m) {
-            throw new CategoryNotFoundException();
-        }
-        catch (UserNotFoundException u){
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @GetMapping("/archives/categories/{emailid}")
+//    public ResponseEntity<?> getAllCategoriesFromList(@PathVariable String emailid) throws UserNotFoundException {
+//        try{
+//            responseEntity = new ResponseEntity<>(archivesService.getAllCategories( emailid), HttpStatus.OK);
+//        }catch(UserNotFoundException e)
+//        {
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
+//
+//
+//    @DeleteMapping("/archives/{emailid}/{categoryid}")
+//    public ResponseEntity<?> deleteCategoryFromList(@PathVariable String emailid,@PathVariable int categoryid) throws UserNotFoundException, CategoryNotFoundException
+//    {
+//        try {
+//            responseEntity = new ResponseEntity<>(archivesService.deleteCategoryFromList(emailid, categoryid), HttpStatus.OK);
+//        }
+//        catch ( CategoryNotFoundException m) {
+//            throw new CategoryNotFoundException();
+//        }
+//        catch (UserNotFoundException u){
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
     @PostMapping("/archives/todo/{emailid}/{categoryid}")
     public ResponseEntity<?> saveTodoToList(@RequestBody Todo todo, @PathVariable String emailid, @PathVariable int categoryid) throws UserNotFoundException {
@@ -110,17 +110,17 @@ public class ArchivesController {
         return responseEntity;
     }
 
-    @PostMapping("/user/updatetodo/{emailid}/{categoryid}")
-    public ResponseEntity<?> updateTodoToList(@RequestBody Todo todo,  @PathVariable String emailid, @PathVariable int categoryid) throws UserNotFoundException {
-        try {
-            responseEntity = new ResponseEntity<>(archivesService.updateTodoToList(todo, categoryid, emailid ), HttpStatus.CREATED);
-        }
-        catch (UserNotFoundException e)
-        {
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @PostMapping("/user/updatetodo/{emailid}/{categoryid}")
+//    public ResponseEntity<?> updateTodoToList(@RequestBody Todo todo,  @PathVariable String emailid, @PathVariable int categoryid) throws UserNotFoundException {
+//        try {
+//            responseEntity = new ResponseEntity<>(archivesService.updateTodoToList(todo, categoryid, emailid ), HttpStatus.CREATED);
+//        }
+//        catch (UserNotFoundException e)
+//        {
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
 
 }

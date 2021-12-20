@@ -3,39 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './accounts/accounts.component';
 import { LoginComponent } from './accounts/login/login.component';
 import { RegisterComponent } from './accounts/register/register.component';
+import { AboutUsComponent } from './footer/about-us/about-us.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 import { CategoryListComponent } from './home/category-list/category-list.component';
 import { CreateCategoryComponent } from './home/category-list/create-category/create-category.component';
 import { CreateTodoComponent } from './home/create-todo/create-todo.component';
 import { HomeComponent } from './home/home.component';
-import { TodoComponent } from './home/todo/todo.component';
+import { AuthGuardService } from './service/guards/auth-guard.service';
 
-const routes: Routes = [{
+const routes: Routes = [
+{
   path: "",
-  // canActivate: [ShouldBeLoginServiceService], 
+  canActivate: [AuthGuardService],
   component: HomeComponent,
-  // children: [
-    // {
-    //   path: "createcategory", component: CreateCategoryComponent,
-    // },
-    // {
-    //   path: "createTodo", component: CreateTodoComponent,
-    // },
-  //   {
-  //     path: "category", component: CategoryListComponent,
-  //     children: [
-  //       {
-  //         path: "todo", component: TodoComponent
-  //       },
-  //     ]
-  //   }
-  // ]
+
 },
-// {
-//   path: "createcategory", component: CreateCategoryComponent,
-// },
-// {
-//   path: "createtodo", component: CreateTodoComponent,
-// },
+{
+  path: "about-us",
+  component: AboutUsComponent
+},
+{
+  path: "privacy-policy",
+  component: PrivacyPolicyComponent
+},
 {
   path: "accounts", component: AccountsComponent,
   children: [

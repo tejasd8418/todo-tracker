@@ -9,7 +9,7 @@ import { User } from 'src/app/model/user';
 export class GuestServiceService {
 
   
-  private baseUrl = 'http://localhost:8086';
+  private baseUrl = 'http://localhost:9000';
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +39,12 @@ export class GuestServiceService {
   }
 
   updateTodo( todo:any, emailid:any ,categoryid:any ){
-    return this.http.post<User>(this.baseUrl + 'api/v5/user/updatetodo/' + emailid + '/' + categoryid, todo);
+    return this.http.post<User>(this.baseUrl + '/api/v5/user/updatetodo/' + emailid + '/' + categoryid, todo);
   }
+
+  getCategoryId(emailId: any, categoryName: any){
+    return this.http.get<number>(this.baseUrl + '/api/v5/getcategoryid/' + emailId + '/' + categoryName);
+  }
+
+  
 }

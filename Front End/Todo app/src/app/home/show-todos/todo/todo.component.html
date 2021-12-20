@@ -1,0 +1,92 @@
+<!-- <ngx-masonry >
+<div ngxMasonryItem class="todo-item" *ngFor="let todo of todos"> -->
+<div class="container"> 
+  <div class="todo-item" *ngFor="let todo of todos"> 
+
+    <mat-card class="example-card">
+      <div class="viewTask"><button mat-icon-button (click)= "displayTodo(longContent, todo)"><mat-icon>fullscreen</mat-icon></button></div>
+      <mat-card-header>
+
+        <mat-card-title class="todoTitle">{{todo.todoTitle}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="mat-card-content">
+        <div *ngFor="let file of fileInfos | async">
+
+          <div *ngIf="todo.imageUrl == file.url">
+            <img src="{{file.url}}" alt="img" width="125px" height="70px">
+          </div>
+        </div>
+        <p class="taskContent" *ngIf="todo.imageUrl  != 'http://localhost:8089/files/undefined'" class="taskContent ">
+          {{todo.todoContent}}
+        </p>
+        <p  *ngIf="todo.imageUrl == 'http://localhost:8089/files/undefined' " class="noImageContent">
+          {{todo.todoContent}}
+        </p>
+        
+
+      </mat-card-content>
+      <!-- <mat-divider inset></mat-divider> -->
+      <mat-card-actions>
+        <button mat-button (click)="updateTodo(todo, selectedCategory)">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-button (click)="addGuest(todo)">
+          <mat-icon>share</mat-icon> SHARE
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="threeDots">
+          <button mat-menu-item (click)="addToArchives(todo)">
+            <span>
+              <mat-icon>archive</mat-icon> Add to archives
+            </span>
+          </button>
+          <button mat-menu-item (click)="highPriority(todo, selectedCategory)">
+            <span>
+              <mat-icon>priority_high</mat-icon> Set as high priority
+            </span>
+          </button>
+          <button mat-menu-item (click)="complete(todo, selectedCategory)">
+            <span>
+              <mat-icon>done_all</mat-icon> Completed
+            </span>
+          </button>
+          <button mat-menu-item (click)="deleteTodo(todo)">
+            <span>
+              <mat-icon>delete_outline</mat-icon> Delete
+            </span>
+          </button>
+        </mat-menu>
+      </mat-card-actions>
+    </mat-card>
+   <!-- </div> -->
+</div> 
+</div>
+<!-- </ngx-masonry> -->
+
+
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"><b>Title: </b>  {{todoView.todoTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><b>Content:</b>  {{todoView.todoContent}}</p>
+    <div *ngIf="todoView.imageUrl != 'http://localhost:8089/files/undefined'">
+    <img src="{{todoView.imageUrl}}" width="300px" height="300px">
+  </div>
+    <p><b>Due Date:</b>  {{todoView.dueDate}}</p>
+    <p><b>High Priority:</b>  {{todoView.highPriority}}</p>
+    <p><b>Completed:</b>  {{todoView.completed}}</p>
+    <b>Guests:</b> 
+    <p *ngFor="let guest of todoView.guests">
+       {{guest.guestEmailId}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

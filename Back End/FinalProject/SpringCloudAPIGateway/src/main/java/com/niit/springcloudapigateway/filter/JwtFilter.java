@@ -18,10 +18,8 @@ public class JwtFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        //expects the token to come from the header
         final String authHeader = request.getHeader("Authorization");
         if(request.getMethod().equals("OPTIONS")){
-            //if the method is options the request can pass through not validation of token is required
             response.setStatus(HttpServletResponse.SC_OK);
             filterChain.doFilter(request,response);
         }
@@ -29,14 +27,11 @@ public class JwtFilter extends GenericFilterBean {
         {
             throw new ServletException("Missing or Invalid Token");
         }
-        //extract token from the header
-        String token = authHeader.substring(7);//Bearer => 6+1 = 7, since token begins with Bearer
 
-        //token validation
+        String token = authHeader.substring(7);
+
         Claims claims = Jwts.parser().setSigningKey("mysecret").parseClaimsJws(token).getBody();
         request.setAttribute("claims",claims);
-
-        //pass the claims in the request, anyone wanting to
 
         filterChain.doFilter(request,response);
     }

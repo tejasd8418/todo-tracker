@@ -12,7 +12,7 @@ export class ArchivesServiceService {
 
   constructor(private http: HttpClient) { }
 
-  private baseUrl = 'http://localhost:8083/api/v4/archivesservice';
+  private baseUrl = 'http://localhost:9000/api/v4/archivesservice';
 
   registerUser(user: any){
     return this.http.post<User>(this.baseUrl + '/register/', user)
@@ -30,9 +30,7 @@ export class ArchivesServiceService {
     return this.http.post<User>(this.baseUrl + '/archives/category/' + emailId, category);
   }
 
-  // updateCategory(emailId:any, category: Category){
-  //   return this.http.put<User>(this.baseUrl + '/api/v1/user/updatecategory/' + emailId, category);
-  // }
+ 
 
   getAllTodos(emailId: any, categoryId: any): Observable<Todo[]>{
     return this.http.get<Todo[]>(this.baseUrl + '/category/todos/' + emailId + '/' + categoryId ); 

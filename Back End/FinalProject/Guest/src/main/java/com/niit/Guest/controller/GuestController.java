@@ -25,14 +25,26 @@ public class GuestController {
         this.guestService = guestService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) throws UserAlreadyExistsException {
+//    @PostMapping("/register")
+//    public ResponseEntity<?> registerUser(@RequestBody User user) throws UserAlreadyExistsException {
+//        try {
+//            responseEntity =  new ResponseEntity<>(guestService.registerUser(user), HttpStatus.CREATED);
+//        }
+//        catch(UserAlreadyExistsException e)
+//        {
+//            throw new UserAlreadyExistsException();
+//        }
+//        return responseEntity;
+//    }
+
+    @GetMapping("/getcategoryid/{emailid}/{categoryname}")
+    public ResponseEntity<?> getCategoryId(@PathVariable String emailid, @PathVariable String categoryname) throws UserNotFoundException {
         try {
-            responseEntity =  new ResponseEntity<>(guestService.registerUser(user), HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<>(guestService.getCategoryIdByCategoryName(emailid, categoryname), HttpStatus.CREATED);
         }
-        catch(UserAlreadyExistsException e)
+        catch (UserNotFoundException e)
         {
-            throw new UserAlreadyExistsException();
+            throw new UserNotFoundException();
         }
         return responseEntity;
     }
@@ -51,32 +63,32 @@ public class GuestController {
     }
 
 
-    @GetMapping("/user/categories/{emailid}")
-    public ResponseEntity<?> getAllCategoriesFromList(@PathVariable String emailid) throws UserNotFoundException {
-        try{
-            responseEntity = new ResponseEntity<>(guestService.getAllCategories(emailid), HttpStatus.OK);
-        }catch(UserNotFoundException e)
-        {
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @GetMapping("/user/categories/{emailid}")
+//    public ResponseEntity<?> getAllCategoriesFromList(@PathVariable String emailid) throws UserNotFoundException {
+//        try{
+//            responseEntity = new ResponseEntity<>(guestService.getAllCategories(emailid), HttpStatus.OK);
+//        }catch(UserNotFoundException e)
+//        {
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
 
-    @DeleteMapping("/user/{emailid}/{categoryid}")
-    public ResponseEntity<?> deleteCategoryFromList(@PathVariable String emailid,@PathVariable int categoryid) throws UserNotFoundException, CategoryNotFoundException
-    {
-        try {
-            responseEntity = new ResponseEntity<>(guestService.deleteCategoryFromList(emailid, categoryid), HttpStatus.OK);
-        }
-        catch ( CategoryNotFoundException m) {
-            throw new CategoryNotFoundException();
-        }
-        catch (UserNotFoundException u){
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @DeleteMapping("/user/{emailid}/{categoryid}")
+//    public ResponseEntity<?> deleteCategoryFromList(@PathVariable String emailid,@PathVariable int categoryid) throws UserNotFoundException, CategoryNotFoundException
+//    {
+//        try {
+//            responseEntity = new ResponseEntity<>(guestService.deleteCategoryFromList(emailid, categoryid), HttpStatus.OK);
+//        }
+//        catch ( CategoryNotFoundException m) {
+//            throw new CategoryNotFoundException();
+//        }
+//        catch (UserNotFoundException u){
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
     @PostMapping("/user/todo/{emailid}/{categoryid}")
     public ResponseEntity<?> saveTodoToList(@RequestBody Todo todo, @PathVariable String emailid, @PathVariable int categoryid) throws UserNotFoundException {
@@ -90,39 +102,39 @@ public class GuestController {
         return responseEntity;
     }
 
-    @GetMapping("/user/todos/{emailid}/{categoryid}")
-    public ResponseEntity<?> getAllTodo(@PathVariable int categoryid, @PathVariable String emailid) throws UserNotFoundException {
-        try{
-            responseEntity = new ResponseEntity<>(guestService.getAllTodo(categoryid, emailid), HttpStatus.OK);
-        }catch(UserNotFoundException e)
-        {
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @GetMapping("/user/todos/{emailid}/{categoryid}")
+//    public ResponseEntity<?> getAllTodo(@PathVariable int categoryid, @PathVariable String emailid) throws UserNotFoundException {
+//        try{
+//            responseEntity = new ResponseEntity<>(guestService.getAllTodo(categoryid, emailid), HttpStatus.OK);
+//        }catch(UserNotFoundException e)
+//        {
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
-    @DeleteMapping("/user/deletetodo/{emailid}/{categoryid}/{todoid}")
-    public ResponseEntity<?> deleteTodoFromList(@PathVariable int todoid,@PathVariable int categoryid,@PathVariable String emailid) throws UserNotFoundException, CategoryNotFoundException
-    {
-        try {
-            responseEntity = new ResponseEntity<>(guestService.deleteTodoFromList(todoid,categoryid, emailid), HttpStatus.OK);
-        }
-        catch (UserNotFoundException u){
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @DeleteMapping("/user/deletetodo/{emailid}/{categoryid}/{todoid}")
+//    public ResponseEntity<?> deleteTodoFromList(@PathVariable int todoid,@PathVariable int categoryid,@PathVariable String emailid) throws UserNotFoundException, CategoryNotFoundException
+//    {
+//        try {
+//            responseEntity = new ResponseEntity<>(guestService.deleteTodoFromList(todoid,categoryid, emailid), HttpStatus.OK);
+//        }
+//        catch (UserNotFoundException u){
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
-    @PostMapping("/user/updatetodo/{emailid}/{categoryid}")
-    public ResponseEntity<?> updateTodoToList(@RequestBody Todo todo, @PathVariable String emailid, @PathVariable int categoryid) throws UserNotFoundException {
-        try {
-            responseEntity = new ResponseEntity<>(guestService.updateTodoToList(todo, categoryid, emailid ), HttpStatus.CREATED);
-        }
-        catch (UserNotFoundException e)
-        {
-            throw new UserNotFoundException();
-        }
-        return responseEntity;
-    }
+//    @PostMapping("/user/updatetodo/{emailid}/{categoryid}")
+//    public ResponseEntity<?> updateTodoToList(@RequestBody Todo todo, @PathVariable String emailid, @PathVariable int categoryid) throws UserNotFoundException {
+//        try {
+//            responseEntity = new ResponseEntity<>(guestService.updateTodoToList(todo, categoryid, emailid ), HttpStatus.CREATED);
+//        }
+//        catch (UserNotFoundException e)
+//        {
+//            throw new UserNotFoundException();
+//        }
+//        return responseEntity;
+//    }
 
 }

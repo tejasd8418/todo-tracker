@@ -1,0 +1,16 @@
+.todoTab{
+    width:25%;
+    z-index: 1000;
+}
+
+.completedTab{
+    width:25%;
+    z-index: 1000;
+
+}
+
+.archivesTab{
+    width:25%;
+    z-index: 1000;
+
+}

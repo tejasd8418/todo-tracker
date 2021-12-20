@@ -16,17 +16,17 @@ public interface ArchivesService {
 
     User registerUser(User user) throws UserAlreadyExistsException;
     User saveCategory(Category category, String emailId) throws UserNotFoundException;
-    User deleteCategoryFromList(String emailId,int categoryId) throws UserNotFoundException, CategoryNotFoundException;
-    List<Category> getAllCategories(String emailId) throws UserNotFoundException;
-    User updateCategory(Category category, String emailId) throws UserNotFoundException;
+//    User deleteCategoryFromList(String emailId,int categoryId) throws UserNotFoundException, CategoryNotFoundException;
+//    List<Category> getAllCategories(String emailId) throws UserNotFoundException;
+//    User updateCategory(Category category, String emailId) throws UserNotFoundException;
 
 
     User saveTodo(Todo todo, int categoryId, String emailId) throws UserNotFoundException;
     User deleteTodo(int todoId, int categoryId, String emailId) throws UserNotFoundException;
-    User updateTodoToList(Todo todo, int categoryId, String emailId) throws UserNotFoundException;
+//    User updateTodoToList(Todo todo, int categoryId, String emailId) throws UserNotFoundException;
     List<Todo> getAllTodo( int categoryId, String emailId) throws UserNotFoundException;
 
-    public Todo addGuest(Guest guest, int todoId, int categoryId, String emailId) throws UserNotFoundException;
+//    public Todo addGuest(Guest guest, int todoId, int categoryId, String emailId) throws UserNotFoundException;
 
 
     }

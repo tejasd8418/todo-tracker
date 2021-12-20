@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/class/user';
+import { ArchivesServiceService } from 'src/app/service/archivesService/archives-service.service';
 
 import { TodoServiceService } from 'src/app/service/todoService/todo-service.service';
 import { UserServiceService } from 'src/app/service/userService/user-service.service';
@@ -31,11 +33,11 @@ export class RegisterComponent {
 
 
 
-  constructor(private fb: FormBuilder, private registerAccount: UserServiceService, private todoService: TodoServiceService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private registerAccount: UserServiceService, private todoService: TodoServiceService, private archivesService: ArchivesServiceService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
 
   onSubmit(): void {
-    // const newAccount = new User(this.registerForm.value.emailId, this.registerForm.value.userName, this.registerForm.value.password, this.registerForm.value.phoneNo);
+
 
     let newAccount: User = new User();
     
@@ -46,9 +48,14 @@ export class RegisterComponent {
 
     this.todoService.registerUser(newAccount).subscribe(data => {
       console.log(data);
-      this.router.navigate(["../login"], { relativeTo: this.route });
-    },
+      this.archivesService.registerUser(newAccount).subscribe(data=>{
+        console.log(data);
+          this.router.navigate(["../login"], { relativeTo: this.route });
+          this.snackBar.open("Registered Successfully", "X");
 
+        
+      })
+    },
       error => {
         console.log(error)
         this.errorMessage = '';
@@ -59,7 +66,12 @@ export class RegisterComponent {
         else
           this.errorMessage = 'Site Unavailable, Try again later !!';
         console.log(error.status);
+        this.snackBar.open("Registered Failed", "X");
+
       });
+
+
+      
   }
 
   login(){

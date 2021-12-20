@@ -23,14 +23,16 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "angular-masonry": "^0.17.0",
     "bootstrap": "^4.5.0",
+    "firebase": "^9.4.0",
+    "imagesloaded": "^4.1.4",
     "masonry-layout": "^4.2.2",
     "ngx-masonry": "^12.0.0",
+    "rxfire": "^6.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "firebase": "^9.4.0",
-    "rxfire": "^6.0.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.7",

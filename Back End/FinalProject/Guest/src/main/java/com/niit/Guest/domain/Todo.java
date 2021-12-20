@@ -8,7 +8,8 @@ public class Todo {
     private int todoId;
     private String todoTitle;
     private String todoContent;
-    private Image image;
+//    private Image image;
+    private String imageUrl;
     private LocalDate dueDate;
     private boolean isHighPriority;
     private boolean isCompleted;
@@ -24,11 +25,11 @@ public class Todo {
     public Todo() {
     }
 
-    public Todo(int todoId, String todoTitle, String todoContent, Image image, LocalDate dueDate, boolean isHighPriority, boolean isCompleted, boolean isGuest, boolean isArchived, LocalDate dateAdded, List<Guest> guests, int categoryId, String emailId) {
+    public Todo(int todoId, String todoTitle, String todoContent, String imageUrl, LocalDate dueDate, boolean isHighPriority, boolean isCompleted, boolean isGuest, boolean isArchived, LocalDate dateAdded, List<Guest> guests, int categoryId, String emailId) {
         this.todoId = todoId;
         this.todoTitle = todoTitle;
         this.todoContent = todoContent;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.dueDate = dueDate;
         this.isHighPriority = isHighPriority;
         this.isCompleted = isCompleted;
@@ -64,12 +65,12 @@ public class Todo {
         this.todoContent = todoContent;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public LocalDate getDueDate() {

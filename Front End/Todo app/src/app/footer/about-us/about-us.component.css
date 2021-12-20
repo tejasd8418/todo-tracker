@@ -1,0 +1,30 @@
+p{
+    font-size: 150%;
+    margin-right: 10%;
+    margin-top: 2%;
+    letter-spacing: 0.3px;  
+    line-height: 28px;  
+
+}
+.about{
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+h1{
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.sincerly{
+    margin-top: 4%;
+    font-size: 150%;
+}
+
+.lastWord{
+    font-size: 150%;
+
+}

@@ -6,42 +6,50 @@
           <span>ToDo</span>
         </div>
         <div style="display: flex; float: right;">
-          <button mat-button *ngIf=selectedCategory>{{selectedCategory.categoryName}}</button>
-          <button mat-button (click)="createTodo(selectedCategory)">
-            <mat-icon> list_alt</mat-icon> Create Todo
-          </button>
+          <!-- <button mat-button *ngIf=selectedCategory>{{selectedCategory.categoryName}}</button> -->
+          <!-- <button mat-button (click)="createTodo(selectedCategory)"> -->
+            <!-- <mat-icon> list_alt</mat-icon> Create Todo
+          </button> -->
           <button mat-button (click)="accountInfo()">
-            <mat-icon>account_circle</mat-icon> My Account
+            <mat-icon>account_circle</mat-icon>{{currentUser}}
           </button>
           <button mat-button>
             <mat-icon>notifications</mat-icon> Notifications
           </button>
-          <button mat-button>
+          <button mat-button (click)="logout()">
             <mat-icon>exit_to_app</mat-icon> Logout
           </button>
 
         </div>
       </div>
     </mat-toolbar>
+
     <!-- Add Content Here -->
+
     <div class="row">
       <app-category-list class="app-category-list" (selectedCategory)="onSelectedCategory($event)"
         [displayCategories]="displayCategories"></app-category-list>
-      <mat-tab-group mat-stretch-tabs class="showTodos" animationDuration="0ms">
-        <mat-tab label="To Do">
-        <app-todo [selectedCategory]="selectedCategory" [todosToDisplay]="todosToDisplay" [refresh]="refresh"
-          (selectionChanged)="onSelectionChanged($event)" (changeMade)="onChangeMade($event)"></app-todo>
-        </mat-tab>
-        <mat-tab label="Completed">
-          <app-completed [selectedCategory]="selectedCategory" [todosToDisplay]="todosToDisplay" [refresh]="refresh"
-          (selectionChanged)="onSelectionChanged($event)" (changeMade)="onChangeMade($event)"></app-completed>
-        </mat-tab>
-        <mat-tab label="Archived">
-          <app-archives [selectedCategory]="selectedCategory" [archivesToDisplay]="archivesToDisplay" [refresh]="refresh"
-          (selectionChanged)="onSelectionChanged($event)" (changeMade)="onChangeMade($event)"></app-archives>
-        </mat-tab>
-      </mat-tab-group>
+      <app-show-todos [selectedCategory]="selectedCategory" [todosToDisplay]="todosToDisplay" [refresh]="refresh"
+      (selectionChanged)="onSelectionChanged($event)" [archivesToDisplay]="archivesToDisplay" ></app-show-todos>
+
+    </div>
+    <div *ngIf="selectedCategory" class="newTask">
+      <button mat-fab color="primary" (click)="createTodo(selectedCategory)">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 
+    <footer id="footer">
+      <hr>
+
+      <p class="copyRight">COPYRIGHT © TODO-TRACKER 2021. ALL RIGHTS RESERVED.</p>
+
+      <div class="footerContent">
+      <a routerLink="about-us" class="aboutUs">About Us</a>
+       <a routerLink="privacy-policy" class="privacyPolicy">Privacy Policy</a> 
+    </div>
+    
+    </footer>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

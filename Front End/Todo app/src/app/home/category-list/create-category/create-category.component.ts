@@ -19,7 +19,7 @@ export class CreateCategoryComponent implements OnInit {
   updateCategory = new EventEmitter();
 
   ngOnInit(): void {
-    // console.log(this.data.categoryId);
+
     if (this.data != null) {
       this.createCategoryForm?.setValue(this.data);
     }
@@ -36,7 +36,7 @@ export class CreateCategoryComponent implements OnInit {
     const newCategory = new Category(this.createCategoryForm.value.categoryName);
     console.log(newCategory);
 
-    newCategory.emailId = "tejas@gmail.com";
+
     if (this.data?.categoryId != null) {
       newCategory.categoryId = this.data.categoryId;
       this.onClose();
@@ -44,19 +44,15 @@ export class CreateCategoryComponent implements OnInit {
 
     if (newCategory.categoryId == null) {
 
-      this.todoService.saveCategory(newCategory.emailId, newCategory).subscribe(data => {
+      this.todoService.saveCategory(sessionStorage.getItem('emailId'), newCategory).subscribe(data => {
         console.log(data);
         
       })
 
-      // this.archivesService.saveCategory(newCategory.emailId, newCategory).subscribe(data=>{
-      //   console.log(data);
-      //   this.onClose();
-      // })
       
     }
     else {
-      this.todoService.updateCategory(newCategory.emailId, newCategory).subscribe(data => {
+      this.todoService.updateCategory(sessionStorage.getItem('emailId'), newCategory).subscribe(data => {
         console.log(data);
       })
     }
@@ -69,7 +65,7 @@ export class CreateCategoryComponent implements OnInit {
     const newCategory = new Category(this.createCategoryForm.value.categoryName);
     console.log(newCategory);
 
-    newCategory.emailId = "tejas@gmail.com";
+
     if (this.data?.categoryId != null) {
       newCategory.categoryId = this.data.categoryId;
       this.onClose();
@@ -77,7 +73,7 @@ export class CreateCategoryComponent implements OnInit {
 
     if (newCategory.categoryId == null) {
 
-      this.archivesService.saveCategory(newCategory.emailId, newCategory).subscribe(data => {
+      this.archivesService.saveCategory(sessionStorage.getItem('emailId'), newCategory).subscribe(data => {
         console.log(data);
         this.onClose();
       })  
@@ -86,9 +82,9 @@ export class CreateCategoryComponent implements OnInit {
 
   onClose() {
     this.createCategoryForm.reset();
-    // this.categoryListComponent.ngOnInit(); 
+
     this.dialogRef.close();
-    // this.router.navigateByUrl("");
+
   }
 
 }

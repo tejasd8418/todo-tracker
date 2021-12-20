@@ -212,6 +212,7 @@ public class TodoServiceImpl implements TodoService {
         User user = todoRepository.findById(emailId).get();
         for (Category category: user.getCategories()) {
                     if(category.getCategoryId() == categoryId) {
+                        System.out.println(category.getTodos());
                         category.getTodos().removeIf(x -> x.getTodoId() == todoId);
                         return todoRepository.save(user);
                     }

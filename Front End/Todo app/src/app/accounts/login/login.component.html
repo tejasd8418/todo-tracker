@@ -1,3 +1,4 @@
+<div class="container">
 <div class="formContainer">
 <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
@@ -19,7 +20,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Password" formControlName="password">
+            <input matInput placeholder="Password" type="password" formControlName="password">
           </mat-form-field>
         
         </div>
@@ -33,4 +34,5 @@
     </mat-card-actions>
   </mat-card>
 </form>
+</div>
 </div>

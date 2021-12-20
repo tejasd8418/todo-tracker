@@ -11,13 +11,15 @@ import { Todo } from 'src/app/model/todo';
 })
 export class TodoServiceService {
 
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = 'http://localhost:9000';
 
   constructor(private http: HttpClient) { }
 
   registerUser(user: any){
     return this.http.post<User>(this.baseUrl + '/api/v1/register/', user)
   }
+
+
 
   getAllCategories(emailId: any): Observable<any[]>{
     return this.http.get<User[]>(this.baseUrl + '/api/v1/user/categories/' + emailId); 

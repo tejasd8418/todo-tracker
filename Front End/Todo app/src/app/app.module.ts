@@ -19,7 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './accounts/login/login.component';
 import { RegisterComponent } from './accounts/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { CreateTodoComponent } from './home/create-todo/create-todo.component';
 import { CategoryListComponent } from './home/category-list/category-list.component';
@@ -32,7 +32,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 
-import { NgxMasonryModule } from 'ngx-masonry';
+import { NgxMasonryComponent, NgxMasonryModule } from 'ngx-masonry';
+
 import {MatMenuModule} from '@angular/material/menu';
 import { CreateCategoryComponent } from './home/category-list/create-category/create-category.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -46,14 +47,18 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { TodoComponent } from './home/todo/todo.component';
-import { AddGuestComponent } from './home/todo/add-guest/add-guest.component';
-import { ArchivesComponent } from './home/archives/archives.component';
-import { CompletedComponent } from './home/completed/completed.component';
+
+import { AuthHttpInterceptorService } from './service/httpInterceptor/auth-http-interceptor.service';
+import { TodoComponent } from './home/show-todos/todo/todo.component';
+import { AddGuestComponent } from './home/show-todos/todo/add-guest/add-guest.component';
+import { ArchivesComponent } from './home/show-todos/archives/archives.component';
+import { CompletedComponent } from './home/show-todos/completed/completed.component';
+import { ShowTodosComponent } from './home/show-todos/show-todos.component';
+import { AboutUsComponent } from './footer/about-us/about-us.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
-// import { AngularFireModule } from '@angular/fire';
-// import { AngularFireMessagingModule } from "@angular/fire/messaging";
 
 
 
@@ -70,11 +75,13 @@ import { CompletedComponent } from './home/completed/completed.component';
     CreateCategoryComponent,
     AddGuestComponent,
     ArchivesComponent,
-    CompletedComponent
-  ],
+    CompletedComponent,
+    ShowTodosComponent,
+    AboutUsComponent,
+    PrivacyPolicyComponent
+    ],
   imports: [
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
-    // AngularFireMessagingModule,
+
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -102,21 +109,19 @@ import { CompletedComponent } from './home/completed/completed.component';
     MatDialogModule,
     NgxMasonryModule,
     MatMenuModule,
-    // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    // provideAnalytics(() => getAnalytics()),
-    // provideAuth(() => getAuth()),
-    // provideDatabase(() => getDatabase()),
-    // provideFirestore(() => getFirestore()),
-    // provideFunctions(() => getFunctions()),
-    // provideMessaging(() => getMessaging()),
-    // providePerformance(() => getPerformance()),
-    // provideRemoteConfig(() => getRemoteConfig()),
-    // provideStorage(() => getStorage())
+    MatSnackBarModule
+
     
   ],
   providers: [
-    // ScreenTrackingService,UserTrackingService, 
-    CategoryListComponent
+
+    CategoryListComponent, 
+    { 
+      provide:HTTP_INTERCEPTORS, 
+      useClass: AuthHttpInterceptorService, 
+      multi:true 
+    },
+    TodoComponent
   ],
   bootstrap: [AppComponent]
 })

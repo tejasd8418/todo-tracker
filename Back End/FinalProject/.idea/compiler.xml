@@ -12,6 +12,7 @@
         <module name="Guest" />
         <module name="NotificationService" />
         <module name="UserAuthentication" />
+        <module name="ImageService" />
         <module name="SpringCloudAPIGateway" />
         <module name="ArchivesService" />
       </profile>
@@ -22,6 +23,7 @@
       <module name="ArchivesService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
       <module name="Guest" options="-parameters" />
+      <module name="ImageService" options="-parameters" />
       <module name="NotificationService" options="-parameters" />
       <module name="SpringCloudAPIGateway" options="-parameters" />
       <module name="ToDo" options="-parameters" />

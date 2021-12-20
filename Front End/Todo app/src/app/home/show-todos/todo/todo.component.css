@@ -1,0 +1,73 @@
+.todo-item {
+  /* display: flex;
+  flex-direction: column; */
+  margin: 10px;
+
+}
+
+.mat-card {
+  height: 250px;
+}
+
+.mat-card-content {
+  font-size: medium;
+}
+
+.mat-card-actions{
+  position: absolute;
+  bottom: 10%;
+}
+
+ngx-masonry {
+  height: 100%;
+}
+
+.example-card {
+  width: 320px;
+
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+
+
+}
+
+.example-header-image {
+
+  background-size: cover;
+}
+
+.taskContent{
+  overflow: hidden;
+ text-overflow: ellipsis;
+ display: -webkit-box;
+ -webkit-line-clamp: 3;
+ -webkit-box-orient: vertical;
+}
+
+.noImageContent{
+  margin-top: 20px;
+font-size: larger;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.todoTitle{
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.viewTask{
+  display: inline;
+  position: absolute;
+  right: 5%;
+}

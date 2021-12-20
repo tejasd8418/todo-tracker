@@ -1,0 +1,67 @@
+  
+  <div class="container"> 
+    <div class="todo-item" *ngFor="let archiveTask of archived"> 
+  
+      <mat-card class="example-card">
+        <div class="viewTask"><button mat-icon-button (click)= "displayTodo(longContent, archiveTask)"><mat-icon>fullscreen</mat-icon></button></div>
+        <mat-card-header>
+  
+          <mat-card-title class="todoTitle">{{archiveTask.todoTitle}}</mat-card-title>
+        </mat-card-header>
+  
+        <mat-card-content class="mat-card-content">
+          <div *ngFor="let file of fileInfos | async">
+  
+            <div *ngIf="archiveTask.imageUrl == file.url">
+              <img src="{{file.url}}" alt="img" width="125px" height="70px">
+            </div>
+          </div>
+          <p class="taskContent" *ngIf="archiveTask.imageUrl  != 'http://localhost:8089/files/undefined'" class="taskContent ">
+            {{archiveTask.todoContent}}
+          </p>
+          <p  *ngIf="archiveTask.imageUrl == 'http://localhost:8089/files/undefined' " class="noImageContent">
+            {{archiveTask.todoContent}}
+          </p>
+          
+  
+        </mat-card-content>
+        <!-- <mat-divider inset></mat-divider> -->
+        <mat-card-actions>
+            <button mat-menu-item (click)="removeFromArchives(archiveTask)">
+              <span><mat-icon>archive</mat-icon> Remove From Archives</span>
+            </button>
+            <button mat-menu-item (click)="deleteTodo(archiveTask)">
+                <span>
+                    <mat-icon>delete_outline</mat-icon> Delete
+                </span>
+            </button>
+
+        </mat-card-actions>
+      </mat-card>
+  </div> 
+  </div>
+  
+  
+  <ng-template #longContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title"><b>Title: </b>  {{todoView.todoTitle}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><b>Content:</b>  {{todoView.todoContent}}</p>
+      <div *ngIf="todoView.imageUrl != 'http://localhost:8089/files/undefined'">
+        <img src="{{todoView.imageUrl}}" width="300px" height="300px">
+      </div>
+      <p><b>Due Date:</b>  {{todoView.dueDate}}</p>
+      <p><b>High Priority:</b>  {{todoView.highPriority}}</p>
+      <p><b>Completed:</b>  {{todoView.completed}}</p>
+      <b>Guests:</b> 
+      <p *ngFor="let guest of todoView.guests">
+         {{guest.guestEmailId}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

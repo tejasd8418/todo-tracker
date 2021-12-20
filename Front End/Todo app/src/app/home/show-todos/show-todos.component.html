@@ -1,0 +1,31 @@
+<nav ngbNav #nav="ngbNav" class="nav-tabs" style="z-index: 1;">
+  <ng-container ngbNavItem>
+    <a ngbNavLink class="todoTab" (click)="todoTab()" style="z-index: 0;">
+      <p style="text-align: center;">Todo</p>
+    </a>
+    <ng-template ngbNavContent>
+      <app-todo [selectedCategory]="selectedCategory" [todosToDisplay]="todosToDisplay" [refresh]="refresh"
+        (selectionChanged)="onSelectionChanged($event)"></app-todo>
+    </ng-template>
+  </ng-container>
+  <ng-container ngbNavItem>
+      <a ngbNavLink class="completedTab" (click)="completedTab()" style="z-index: 0;">
+        <p style="text-align: center;">Completed</p>
+      </a>
+      <ng-template ngbNavContent>
+      <app-completed [selectedCategory]="selectedCategory" [todosToDisplay]="todosToDisplay" [refresh]="refresh"
+        (selectionChanged)="onSelectionChanged($event)"></app-completed>
+    </ng-template>
+  </ng-container>
+  <ng-container ngbNavItem>
+      <a ngbNavLink class="archivesTab" (click)="archivesTab()" style="z-index: 0;">
+        <p style="text-align: center;">Archives</p>
+      </a>
+      <ng-template ngbNavContent>
+      <app-archives [selectedCategory]="selectedCategory" [archivesToDisplay]="archivesToDisplay" [refresh]="refresh"
+        (selectionChanged)="onSelectionChanged($event)"></app-archives>
+    </ng-template>
+  </ng-container>
+</nav>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
