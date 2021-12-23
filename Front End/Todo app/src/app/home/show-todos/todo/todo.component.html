@@ -2,8 +2,9 @@
 <div ngxMasonryItem class="todo-item" *ngFor="let todo of todos"> -->
 <div class="container"> 
   <div class="todo-item" *ngFor="let todo of todos"> 
-
-    <mat-card class="example-card">
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    <mat-card class="example-card" [ngClass]="(todo.highPriority == true)? 'highPriority' : 'noHighPriority'">
+      
       <div class="viewTask"><button mat-icon-button (click)= "displayTodo(longContent, todo)"><mat-icon>fullscreen</mat-icon></button></div>
       <mat-card-header>
 
@@ -14,7 +15,7 @@
         <div *ngFor="let file of fileInfos | async">
 
           <div *ngIf="todo.imageUrl == file.url">
-            <img src="{{file.url}}" alt="img" width="125px" height="70px">
+            <img src="{{file.url}}" alt="img" width="235px" height="110px" style="margin-bottom: 10px;">
           </div>
         </div>
         <p class="taskContent" *ngIf="todo.imageUrl  != 'http://localhost:8089/files/undefined'" class="taskContent ">
@@ -26,7 +27,6 @@
         
 
       </mat-card-content>
-      <!-- <mat-divider inset></mat-divider> -->
       <mat-card-actions>
         <button mat-button (click)="updateTodo(todo, selectedCategory)">
           <mat-icon>edit</mat-icon> Edit
@@ -34,6 +34,9 @@
         <button mat-button (click)="addGuest(todo)">
           <mat-icon>share</mat-icon> SHARE
         </button>
+        <!-- <button mat-button *ngIf="todo.guest==true" (click)="complete(todo, selectedCategory)">
+            <mat-icon>done_all</mat-icon> Completed
+        </button> -->
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -43,14 +46,20 @@
               <mat-icon>archive</mat-icon> Add to archives
             </span>
           </button>
-          <button mat-menu-item (click)="highPriority(todo, selectedCategory)">
-            <span>
-              <mat-icon>priority_high</mat-icon> Set as high priority
-            </span>
-          </button>
-          <button mat-menu-item (click)="complete(todo, selectedCategory)">
+
+          <button mat-menu-item *ngIf="todo.guest==false" (click)="complete(todo, selectedCategory)">
             <span>
               <mat-icon>done_all</mat-icon> Completed
+            </span>
+          </button>
+          <button mat-menu-item *ngIf="todo.highPriority == false" (click)="highPriority(todo, selectedCategory)">
+            <span>
+              <mat-icon>priority_high</mat-icon> High Priority
+            </span>
+          </button>
+          <button mat-menu-item *ngIf="todo.highPriority == true" (click)="lowPriority(todo, selectedCategory)">
+            <span>
+              <mat-icon>priority_high</mat-icon> Low Priority
             </span>
           </button>
           <button mat-menu-item (click)="deleteTodo(todo)">
@@ -58,8 +67,10 @@
               <mat-icon>delete_outline</mat-icon> Delete
             </span>
           </button>
+
         </mat-menu>
       </mat-card-actions>
+    
     </mat-card>
    <!-- </div> -->
 </div> 
@@ -77,7 +88,7 @@
   <div class="modal-body">
     <p><b>Content:</b>  {{todoView.todoContent}}</p>
     <div *ngIf="todoView.imageUrl != 'http://localhost:8089/files/undefined'">
-    <img src="{{todoView.imageUrl}}" width="300px" height="300px">
+    <img src="{{todoView.imageUrl}}" width="300px" height="200px">
   </div>
     <p><b>Due Date:</b>  {{todoView.dueDate}}</p>
     <p><b>High Priority:</b>  {{todoView.highPriority}}</p>

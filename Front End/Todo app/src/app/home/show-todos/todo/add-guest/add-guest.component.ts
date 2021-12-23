@@ -56,12 +56,13 @@ export class AddGuestComponent implements OnInit {
             if (foundId != 0) {
               this.guestService.saveTodo(this.data, guest.guestEmailId, foundId).subscribe(data => {
                 console.log(data);
-                this.onClose();
+                
               })
             }
           })
         });
       }
+      this.onClose();
     },
     error => {
       console.log(error);

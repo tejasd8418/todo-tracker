@@ -13,7 +13,7 @@
           <div *ngFor="let file of fileInfos | async">
   
             <div *ngIf="archiveTask.imageUrl == file.url">
-              <img src="{{file.url}}" alt="img" width="125px" height="70px">
+              <img src="{{file.url}}" alt="img" width="235px" height="110px" style="margin-bottom: 10px;">
             </div>
           </div>
           <p class="taskContent" *ngIf="archiveTask.imageUrl  != 'http://localhost:8089/files/undefined'" class="taskContent ">
@@ -27,13 +27,11 @@
         </mat-card-content>
         <!-- <mat-divider inset></mat-divider> -->
         <mat-card-actions>
-            <button mat-menu-item (click)="removeFromArchives(archiveTask)">
-              <span><mat-icon>archive</mat-icon> Remove From Archives</span>
+            <button mat-button (click)="removeFromArchives(archiveTask)">
+              <mat-icon>archive</mat-icon> Remove From Archives
             </button>
-            <button mat-menu-item (click)="deleteTodo(archiveTask)">
-                <span>
+            <button mat-button (click)="deleteTodo(archiveTask)">
                     <mat-icon>delete_outline</mat-icon> Delete
-                </span>
             </button>
 
         </mat-card-actions>
@@ -52,7 +50,7 @@
     <div class="modal-body">
       <p><b>Content:</b>  {{todoView.todoContent}}</p>
       <div *ngIf="todoView.imageUrl != 'http://localhost:8089/files/undefined'">
-        <img src="{{todoView.imageUrl}}" width="300px" height="300px">
+        <img src="{{todoView.imageUrl}}" width="300px" height="200px">
       </div>
       <p><b>Due Date:</b>  {{todoView.dueDate}}</p>
       <p><b>High Priority:</b>  {{todoView.highPriority}}</p>

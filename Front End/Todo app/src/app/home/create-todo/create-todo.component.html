@@ -29,15 +29,6 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-8">
-                        <label class="btn btn-default p-0">
-                            <input type="file" (change)="selectFile($event)" formControlName="imageUrl"/>
-                        </label>
-                    </div>
-
-                </div>
-
-                <div class="row">
                     <div class="col">
                         <mat-form-field appearance="fill">
                             <mat-label>Enter Due date</mat-label>
@@ -48,7 +39,18 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <label id="example-radio-group-label">Set Priority: </label>
+
+                <div class="row">
+                    <div class="col-8" *ngIf="this.createTodoForm.value.todoId == null">
+                        <label class="btn btn-default p-0">
+                            <input type="file" (change)="selectFile($event)" formControlName="imageUrl"/>
+                        </label>
+                    </div>
+
+                </div>
+
+                
+                <!-- <label id="example-radio-group-label">Set Priority: </label>
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
                     <mat-radio-button class="example-radio-button" [value]=true>
                         high
@@ -56,7 +58,7 @@
                     <mat-radio-button class="example-radio-button" [value]=false>
                         low
                     </mat-radio-button>
-                </mat-radio-group>
+                </mat-radio-group> -->
             </mat-card-content>
 
             <mat-card-actions>

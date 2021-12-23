@@ -43,9 +43,25 @@ ngx-masonry {
   overflow: hidden;
  text-overflow: ellipsis;
  display: -webkit-box;
- -webkit-line-clamp: 3;
+ -webkit-line-clamp: 1;
  -webkit-box-orient: vertical;
 }
+
+::ng-deep .highPriority{
+
+  border: solid orange;
+  border-radius: 0.5px !important;
+ }
+
+ ::ng-deep .dueDate{
+  border: solid pink;
+  border-radius: 0.5px !important;
+ }
+
+ ::ng-deep .dueDateHighPriority{
+  border: solid red;
+  border-radius: 0.5px !important;
+ }
 
 .noImageContent{
   margin-top: 20px;

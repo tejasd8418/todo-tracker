@@ -2,6 +2,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, Pipe } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category';
 import { Todo } from 'src/app/model/todo';
@@ -17,17 +18,20 @@ import { HomeComponent } from '../home.component';
 })
 export class CreateTodoComponent implements OnInit, OnChanges {
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, @Inject(MAT_DIALOG_DATA) public data1: Category, private todoService: TodoServiceService, public dialogRef: MatDialogRef<CreateTodoComponent>, private archivesService: ArchivesServiceService, private imageUploadingService: ImageUploadingService) { }
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, @Inject(MAT_DIALOG_DATA) public data1: Category, private todoService: TodoServiceService, public dialogRef: MatDialogRef<CreateTodoComponent>, private archivesService: ArchivesServiceService, private imageUploadingService: ImageUploadingService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.fileInfos = this.imageUploadingService.getFiles();
 
     console.log(this.data.todo);
     if (this.data.todo != null) {
+      this.imageUrl1 = this.data.todo.imageUrl;
       this.data.todo.imageUrl = '';
       this.createTodoForm?.setValue(this.data.todo);
     }
   }
+
+  imageUrl1: any;
 
   ngOnChanges() {
 
@@ -110,19 +114,25 @@ export class CreateTodoComponent implements OnInit, OnChanges {
       todo1.categoryId = this.data1.categoryId;
       todo1.imageUrl = "http://localhost:8089/files/" + getActualImageValue;
       
+      
       this.todoService.saveTodo(todo1, sessionStorage.getItem('emailId'), todo1.categoryId).subscribe(data => {
         console.log(data);
+        this.snackBar.open("Todo Created Successfully", "X");
+
         this.onClose();
       })
     }
     else if (this.createTodoForm.value.todoId != null) {
       const todo1: Todo = this.createTodoForm.value;
-      console.log(this.data.todo);
-      todo1.imageUrl = "http://localhost:8089/files/" + getActualImageValue;
-      console.log(todo1.imageUrl);
+      console.log(this.data.todo);      
+      todo1.imageUrl =  this.imageUrl1;
+      // console.log(todo1.imageUrl);
+
       
       this.todoService.updateTodo(todo1, sessionStorage.getItem('emailId'), this.data.todo.categoryId).subscribe(data => {
         console.log(data);
+        this.snackBar.open("Todo Updated Successfully", "X");
+
         this.onClose();
       })
     }

@@ -19,7 +19,9 @@ export class TodoServiceService {
     return this.http.post<User>(this.baseUrl + '/api/v1/register/', user)
   }
 
-
+  guestCompletedTask(notification: any){
+    return this.http.post<User>('http://localhost:8082/api/v3/notificationservice/add', notification);
+  }
 
   getAllCategories(emailId: any): Observable<any[]>{
     return this.http.get<User[]>(this.baseUrl + '/api/v1/user/categories/' + emailId); 

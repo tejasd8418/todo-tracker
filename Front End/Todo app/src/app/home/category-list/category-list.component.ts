@@ -51,7 +51,6 @@ export class CategoryListComponent implements OnInit, OnChanges, OnDestroy {
 
     dialogRef.afterClosed().subscribe(data => {
       console.log(data);
-      this.snackBar.open("Category created Successfully", "X");
 
       this.homeComponent.ngOnInit();
     })

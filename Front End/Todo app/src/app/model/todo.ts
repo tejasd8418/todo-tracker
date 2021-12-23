@@ -11,8 +11,9 @@ export class Todo {
     highPriority!: boolean;
     completed!: boolean;
     guests!: Guest[];
+    guest!: boolean;
 
-    emailId!: string;
+    emailId!: string | null;
     categoryId!: number;
 
 }

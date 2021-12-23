@@ -76,53 +76,6 @@ public class ArchivesServiceImpl implements ArchivesService {
         return archivesRepository.save(user);
     }
 
-//    @Override
-//    public User deleteCategoryFromList(String emailId, int categoryId) throws UserNotFoundException, CategoryNotFoundException {
-//        boolean categoryIdIsPresent = false;
-//        if(archivesRepository.findById(emailId).isEmpty())
-//        {
-//            throw new UserNotFoundException();
-//        }
-//        User user = archivesRepository.findById(emailId).get();
-//        List<Category> categories = user.getCategories();
-//        categoryIdIsPresent = categories.removeIf(x->x.getCategoryId() == categoryId);
-//        if(!categoryIdIsPresent)
-//        {
-//            throw new CategoryNotFoundException();
-//        }
-//        user.setCategories(categories);
-//        return archivesRepository.save(user);
-//    }
-//
-//    @Override
-//    public List<Category> getAllCategories(String emailId) throws UserNotFoundException {
-//        if(archivesRepository.findById(emailId).isEmpty())
-//        {
-//            throw new UserNotFoundException();
-//        }
-//        return archivesRepository.findById(emailId).get().getCategories();
-//    }
-//
-//    @Override
-//    public User updateCategory(Category category, String emailId) throws UserNotFoundException {
-//        int index = 0;
-//        if (archivesRepository.findById(emailId).isEmpty()) {
-//            throw new UserNotFoundException();
-//        }
-//        User user = archivesRepository.findByEmailId(emailId);
-//        List<Category> categories = user.getCategories();
-//        for(Category category1: categories){
-//            if(category1.getCategoryId() == category.getCategoryId()){
-//                index = categories.indexOf(category1);
-//            }
-//        }
-//        categories.remove(index);
-//        categories.add(index, category);
-//        user.setCategories(categories);
-////        return archivesRepository.save(user);
-//        return null;
-//
-//    }
 
     @Override
     public User saveTodo(Todo todo, int categoryId, String emailId) throws UserNotFoundException {
@@ -184,34 +137,6 @@ public class ArchivesServiceImpl implements ArchivesService {
         return null;
     }
 
-//    @Override
-//    public User updateTodoToList(Todo todo, int categoryId, String emailId) throws UserNotFoundException {
-//        if(archivesRepository.findById(emailId).isEmpty())
-//        {
-//            throw new UserNotFoundException();
-//        }
-//        User user1 = new User();
-//        User user = archivesRepository.findByEmailId(emailId);
-//        List<Category> categories = user.getCategories();
-//        for (Category category: categories) {
-//            if(category.getCategoryId() == categoryId){
-//                        List<Todo> todos = category.getTodos();
-//                        int index = 0;
-//                        for (Todo todo1: todos) {
-//                            if(todo1.getTodoId() == todo.getTodoId()){
-//                                index = todos.indexOf(todo1);
-//                            }
-//                        }
-//                        todos.removeIf(x-> todo.getTodoId() == x.getTodoId());
-//                        todos.add(index, todo);
-//                        category.setTodos(todos);
-//                        user.setCategories(categories);
-//                return archivesRepository.save(user);
-//                    }
-//
-//            }
-//        return null;
-//    }
 
     @Override
     public List<Todo> getAllTodo( int categoryId, String emailId) throws UserNotFoundException {
@@ -250,17 +175,5 @@ public class ArchivesServiceImpl implements ArchivesService {
         return null;
     }
 
-//    @Override
-//    public Todo addGuest(Guest guest, int todoId, int categoryId, String emailId) throws UserNotFoundException {
-//        Todo todo =  findTodoById(todoId, categoryId, emailId);
-//        List<Guest> guests = new ArrayList<>();
-//        if(todo.getGuests()!=null) {
-//            guests = todo.getGuests();
-//        }
-//        System.out.println(guests.size());
-//        guests.add(guest);
-//        todo.setGuests(guests);
-//        updateTodoToList(todo,categoryId,emailId);
-//        return todo;
-//    }
+
 }

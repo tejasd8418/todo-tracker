@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { ArchivesServiceService } from 'src/app/service/archivesService/archives-service.service';
@@ -14,7 +15,7 @@ import { CategoryListComponent } from '../category-list.component';
 })
 export class CreateCategoryComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private todoService: TodoServiceService,  public dialogRef: MatDialogRef<CreateCategoryComponent>, public router: Router, @Inject(MAT_DIALOG_DATA) public data: Category, private archivesService: ArchivesServiceService) { }
+  constructor(private fb: FormBuilder, private todoService: TodoServiceService,  public dialogRef: MatDialogRef<CreateCategoryComponent>, public router: Router, @Inject(MAT_DIALOG_DATA) public data: Category, private archivesService: ArchivesServiceService, private snackBar: MatSnackBar) { }
 
   updateCategory = new EventEmitter();
 
@@ -46,7 +47,8 @@ export class CreateCategoryComponent implements OnInit {
 
       this.todoService.saveCategory(sessionStorage.getItem('emailId'), newCategory).subscribe(data => {
         console.log(data);
-        
+        this.snackBar.open("Category created Successfully", "X");
+
       })
 
       

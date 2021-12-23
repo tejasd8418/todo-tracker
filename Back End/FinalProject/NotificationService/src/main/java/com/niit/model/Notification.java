@@ -10,6 +10,8 @@ import java.io.Serializable;
 public class Notification implements Serializable {
     @Id
     private int notificationId;
+    private String emailId;
+    private String guestEmailId;
     private String notificationTitle;
     private String notificationContent;
     private Time notificationTime;

@@ -10,8 +10,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableEurekaClient
 @EnableFeignClients
 public class ToDoApplication {
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(ToDoApplication.class, args);
 	}

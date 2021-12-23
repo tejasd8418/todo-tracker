@@ -50,18 +50,6 @@ public class TodoController {
     }
 
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> registerUser(@RequestBody User user) throws UserAlreadyExistsException {
-//        try {
-//            responseEntity =  new ResponseEntity<>(todoService.registerUser(user), HttpStatus.CREATED);
-//        }
-//        catch(UserAlreadyExistsException e)
-//        {
-//            throw new UserAlreadyExistsException();
-//        }
-//        return responseEntity;
-//    }
-
     @PostMapping("/user/category/{emailid}")
     public ResponseEntity<?> saveCategoryToList(@RequestBody Category category, @PathVariable String emailid) throws UserNotFoundException {
         try {

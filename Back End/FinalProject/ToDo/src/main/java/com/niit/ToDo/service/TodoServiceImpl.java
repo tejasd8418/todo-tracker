@@ -152,7 +152,6 @@ public class TodoServiceImpl implements TodoService {
         categories.remove(index);
         categories.add(index, category);
         user.setCategories(categories);
-//        return todoRepository.save(user);
         return null;
 
     }

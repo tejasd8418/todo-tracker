@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { CreateTodoComponent } from 'src/app/home/create-todo/create-todo.component';
 import { Category } from 'src/app/model/category';
+import { Notification1 } from 'src/app/model/notification';
 import { Todo } from 'src/app/model/todo';
 import { ArchivesServiceService } from 'src/app/service/archivesService/archives-service.service';
 import { ImageUploadingService } from 'src/app/service/image/image-uploading.service';
@@ -24,11 +25,19 @@ export class TodoComponent implements OnInit, OnChanges {
 
   constructor(private todoService: TodoServiceService, private dialog: MatDialog, private archivesService: ArchivesServiceService, private categoryListComponent: CategoryListComponent, private homeComponent: HomeComponent, private imageUploadingService: ImageUploadingService, private modalService: NgbModal, private snackBar: MatSnackBar) {
     console.log("todo constructor");
-    
+
     this.todos = [];
   }
 
+  dateStr: any;
+
   ngOnInit(): void {
+    let dd = String(this.date.getDate()).padStart(2, '0');
+    let mm = String(this.date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = this.date.getFullYear();
+    this.dateStr = yyyy + '-' + mm + '-' + dd;
+    console.log(this.dateStr);
+
     console.log("todo ngOnINit");
     // this.homeComponent.ngOnInit();
     console.log(sessionStorage.getItem('emailId'));
@@ -48,7 +57,7 @@ export class TodoComponent implements OnInit, OnChanges {
 
     this.fileInfos.subscribe(data => {
       console.log(data);
-      
+
     })
 
 
@@ -68,7 +77,7 @@ export class TodoComponent implements OnInit, OnChanges {
       }
     })
 
-    
+
   }
 
   selectedFiles?: FileList;
@@ -103,10 +112,12 @@ export class TodoComponent implements OnInit, OnChanges {
   todos: Todo[] = [];
   todoView!: Todo;
 
-  displayTodo(longContent: any, todo: Todo){
+  displayTodo(longContent: any, todo: Todo) {
     this.todoView = todo;
     this.modalService.open(longContent, { scrollable: true });
   }
+
+  date: Date = new Date();
 
 
 
@@ -124,14 +135,13 @@ export class TodoComponent implements OnInit, OnChanges {
 
   updateTodo(todo: Todo, selectedCategory: Category) {
     console.log(todo);
-
+    // todo.categoryId = Number(sessionStorage.getItem("categoryId"));
     const dialog1 = this.dialog.open(CreateTodoComponent, {
       width: '1000px',
       data: { todo, selectedCategory }
     });
 
     dialog1.afterClosed().subscribe(data => {
-      this.snackBar.open("Todo Updated Successfully", "X");
 
       console.log(data);
       this.homeComponent.updateTodos(this.selectedCategory);
@@ -141,7 +151,19 @@ export class TodoComponent implements OnInit, OnChanges {
 
   complete(todo: Todo, selectedCategory: Category) {
     todo.completed = true;
-    this.todoService.updateTodo(todo, sessionStorage.getItem('emailId'), todo.categoryId).subscribe(data => {
+    if (todo.emailId != null) {
+      let notification = new Notification1();
+      notification.emailId = todo.emailId;
+      notification.guestEmailId = sessionStorage.getItem("emailId");
+      notification.notificationTitle = "Task completed by: " + notification.guestEmailId;
+      notification.notificationContent = notification.guestEmailId + " completed Task with Title " + todo.todoTitle;
+
+      this.todoService.guestCompletedTask(notification).subscribe(data => {
+        console.log(data);
+
+      })
+    }
+    this.todoService.updateTodo(todo, sessionStorage.getItem('emailId'), sessionStorage.getItem("categoryId")).subscribe(data => {
       console.log(data);
       this.homeComponent.updateTodos(this.selectedCategory);
       this.snackBar.open("Todo Marked as Completed", "X");
@@ -159,7 +181,19 @@ export class TodoComponent implements OnInit, OnChanges {
     })
   }
 
+  lowPriority(todo: Todo, selectedCategory: Category) {
+    todo.highPriority = false;
+    this.todoService.updateTodo(todo, sessionStorage.getItem('emailId'), todo.categoryId).subscribe(data => {
+      console.log(data);
+      this.homeComponent.updateTodos(this.selectedCategory);
+      this.snackBar.open("Todo Marked as Low Priority", "X");
+
+    })
+  }
+
   addGuest(todo: Todo) {
+    todo.guest = true;
+    todo.emailId = sessionStorage.getItem("emailId");
     this.dialog.open(AddGuestComponent, {
       width: '1000px',
       data: todo
@@ -169,7 +203,7 @@ export class TodoComponent implements OnInit, OnChanges {
   addToArchives(todo: Todo) {
 
 
-    this.archivesService.saveTodo(todo, sessionStorage.getItem('emailId'), todo.categoryId).subscribe(data => {
+    this.archivesService.saveTodo(todo, sessionStorage.getItem('emailId'), sessionStorage.getItem("categoryId")).subscribe(data => {
       console.log(data);
       this.categoryListComponent.ngOnInit();
       this.ngOnInit();

@@ -57,6 +57,7 @@ import { ShowTodosComponent } from './home/show-todos/show-todos.component';
 import { AboutUsComponent } from './footer/about-us/about-us.component';
 import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -109,7 +110,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDialogModule,
     NgxMasonryModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
 
     
   ],
